@@ -348,14 +348,28 @@ Cocktail
   .drink-info {
     padding-top: 0;
   }
+  .loading {
+    width: 400px;
+    height: 400px;
+    display: block;
+    margin: 0 auto;
+    object-fit: cover;
+    background: transparent;
+  }
 }
 .loading {
-  width: 400px;
-  height: 400px;
+  width: 200px;
+  height: 200px;
   display: block;
   margin: 0 auto;
   object-fit: cover;
   background: transparent;
+}
+.no-drink {
+  text-align: center;
+  font-size: 1.5rem;
+  text-transform: capitalize;
+  font-weight: bold;
 }
 .loader,
 .loader:before,

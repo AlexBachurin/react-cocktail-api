@@ -20,7 +20,8 @@ export const AppProvider = ({ children }) => {
     return <AppContext.Provider value={{
         drinks,
         loading,
-        setSearchTerm
+        setSearchTerm,
+        term
 
     }}>
         {children}
