@@ -349,6 +349,14 @@ Cocktail
     padding-top: 0;
   }
 }
+.loading {
+  width: 400px;
+  height: 400px;
+  display: block;
+  margin: 0 auto;
+  object-fit: cover;
+  background: transparent;
+}
 .loader,
 .loader:before,
 .loader:after {
