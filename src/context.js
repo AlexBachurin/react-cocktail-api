@@ -7,9 +7,11 @@ const url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 const AppContext = React.createContext();
 
 export const AppProvider = ({ children }) => {
-    const { loading, products } = useFetch(url);
-    console.log(products);
+    const { loading, drinks } = useFetch(url);
+    console.log(drinks);
     return <AppContext.Provider value={{
+        drinks,
+        loading
 
     }}>
         {children}
