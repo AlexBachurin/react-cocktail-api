@@ -67,7 +67,6 @@ export const AppProvider = ({ children }) => {
             try {
                 const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=${filterWord}`);
                 const data = await response.json();
-                console.log(data);
                 const { drinks } = data;
                 //iterate only if there is drinks
                 if (drinks) {
@@ -89,7 +88,12 @@ export const AppProvider = ({ children }) => {
                             glass: strGlass
                         }
                     })
-                    setDrinks(newDrinks);
+                    //if we have some words in searchTerm when filter them, to show only drinks that have it in name
+                    const filteredDrinks = newDrinks.filter(item => {
+                        return item.name.includes(term)
+                    })
+                    console.log(filteredDrinks)
+                    setDrinks(filteredDrinks);
                 } else {
                     setDrinks([]);
                 }
