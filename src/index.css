@@ -362,6 +362,7 @@ Cocktail
   height: 200px;
   display: block;
   margin: 0 auto;
+  margin-top: 30px;
   object-fit: cover;
   background: transparent;
 }
