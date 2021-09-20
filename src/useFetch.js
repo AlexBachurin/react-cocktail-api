@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 export const useFetch = (url) => {
     const [loading, setLoading] = useState(false);
     const [drinks, setDrinks] = useState([])
-
+    const [categories, setCategories] = useState('');
 
     const getData = async () => {
         setLoading(true);
@@ -33,7 +33,12 @@ export const useFetch = (url) => {
                         glass: strGlass
                     }
                 })
-                setDrinks(newDrinks)
+                setDrinks(newDrinks);
+                //also get categories
+                const categoriesArr = drinks.map(item => item.strCategory);
+                //transform to uniq values, since categories repeat
+                const uniqCategories = [...new Set(categoriesArr)]
+                setCategories(uniqCategories);
             } else {
                 setDrinks([]);
             }
@@ -49,5 +54,5 @@ export const useFetch = (url) => {
 
     }, [url])
 
-    return { loading, drinks };
+    return { loading, drinks, categories };
 }

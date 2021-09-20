@@ -1,7 +1,7 @@
 import React from 'react'
 import SearchForm from '../components/SearchForm'
 import CocktailList from '../components/CocktailList'
-
+import Categories from '../components/Categories'
 
 const Home = () => {
 
@@ -10,7 +10,8 @@ const Home = () => {
             <section className="section search">
                 <SearchForm />
             </section>
-            <section className="section">
+            <Categories />
+            <section className="section cocktails">
                 <h2 className="section-title">Cocktails</h2>
                 <CocktailList />
 

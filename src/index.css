@@ -366,47 +366,36 @@ Cocktail
   object-fit: cover;
   background: transparent;
 }
+.loading-title {
+  text-align: center;
+  padding-top: 2rem;
+}
 .no-drink {
   text-align: center;
   font-size: 1.5rem;
   text-transform: capitalize;
   font-weight: bold;
 }
-.loader,
-.loader:before,
-.loader:after {
-  background: transparent;
-  -webkit-animation: load1 1s infinite ease-in-out;
-  animation: load1 1s infinite ease-in-out;
-  width: 1em;
-  height: 4em;
+.category {
+  padding-top: 4rem;
+  padding-bottom: 0;
 }
-.loader {
-  color: var(--primaryColor);
-  text-indent: -9999em;
-  margin: 88px auto;
-  margin-top: 20rem;
-  position: relative;
-  font-size: 3rem;
-  -webkit-transform: translateZ(0);
-  -ms-transform: translateZ(0);
-  transform: translateZ(0);
-  -webkit-animation-delay: -0.16s;
-  animation-delay: -0.16s;
+.category-container {
+  max-width: var(--maxWidth);
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }
-.loader:before,
-.loader:after {
-  position: absolute;
-  top: 0;
-  content: "";
+.category-container button {
+  padding: 10px;
+  border: 1px solid #000;
+  outline: none;
+  cursor: pointer;
+  border-radius: 10px;
 }
-.loader:before {
-  left: -1.5em;
-  -webkit-animation-delay: -0.32s;
-  animation-delay: -0.32s;
-}
-.loader:after {
-  left: 1.5em;
+.cocktails {
+  padding: 1rem 0;
 }
 @-webkit-keyframes load1 {
   0%,

@@ -12,8 +12,8 @@ export const AppProvider = ({ children }) => {
     const [term, setTerm] = useState('');
     //create searchTerm for urlwith search
     const searchTerm = `${url}${term}`;
-    const { loading, drinks } = useFetch(searchTerm);
-
+    const { loading, drinks, categories } = useFetch(searchTerm);
+    console.log(categories);
     const setSearchTerm = (e) => {
         setTerm(e.target.value);
     }
@@ -21,7 +21,8 @@ export const AppProvider = ({ children }) => {
         drinks,
         loading,
         setSearchTerm,
-        term
+        term,
+        categories
 
     }}>
         {children}
