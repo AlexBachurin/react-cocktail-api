@@ -133,6 +133,11 @@ export const AppProvider = ({ children }) => {
         fetchAlcoholic();
     }
 
+    //reset input on every home click
+    const resetOnHome = () => {
+        setTerm('');
+        setFilterWord('');
+    }
     //fetch drinks on every url change
     useEffect(() => {
         getData();
@@ -151,7 +156,8 @@ export const AppProvider = ({ children }) => {
         setSearchTerm,
         term,
         filterClickHandler,
-        filterWord
+        filterWord,
+        resetOnHome
 
 
     }}>

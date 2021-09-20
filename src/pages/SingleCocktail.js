@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import Loading from '../components/Loading';
+import { useGlobalContext } from '../context';
 
 
 
 const SingleCocktail = () => {
+    const { resetOnHome } = useGlobalContext();
     //get id from Link params
     const { id } = useParams();
     //state for single cocktail and loading
@@ -66,7 +68,7 @@ const SingleCocktail = () => {
     }
     return (
         <section className="section cocktail-section">
-            <Link to='/' className="btn btn-primary">
+            <Link onClick={resetOnHome} to='/' className="btn btn-primary">
                 back home
             </Link>
             <h2 className="section-title">{cocktail.name}</h2>
