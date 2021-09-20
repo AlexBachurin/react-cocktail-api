@@ -123,7 +123,8 @@ export const AppProvider = ({ children }) => {
         loading,
         setSearchTerm,
         term,
-        filterClickHandler
+        filterClickHandler,
+        filterWord
 
 
     }}>

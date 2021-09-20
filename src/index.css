@@ -397,6 +397,10 @@ Cocktail
 .cocktails {
   padding: 1rem 0;
 }
+.active-btn {
+  background: #000;
+  color: #fff;
+}
 @-webkit-keyframes load1 {
   0%,
   80%,
