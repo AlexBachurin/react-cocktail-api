@@ -25,6 +25,7 @@ const SingleCocktail = () => {
                     strGlass: glass,
                     strAlcoholic: alco,
                     strInstructions: instructions,
+                    strCategory: category,
                     strIngredient1,
                     strIngredient2,
                     strIngredient3,
@@ -32,7 +33,7 @@ const SingleCocktail = () => {
                     strIngredient5,
                 } = drinks[0];
                 setCocktail({
-                    name, image, glass, alco, instructions, strIngredient1, strIngredient2, strIngredient3, strIngredient4, strIngredient5
+                    name, image, glass, alco, instructions, category, strIngredient1, strIngredient2, strIngredient3, strIngredient4, strIngredient5
                 })
             } else {
                 setCocktail([])

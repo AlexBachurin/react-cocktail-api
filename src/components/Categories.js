@@ -2,25 +2,13 @@ import React from 'react'
 import { useGlobalContext } from '../context'
 
 const Categories = () => {
-    const { categories, loading } = useGlobalContext();
-    // if (loading) {
-    //     return (
-    //         <h3>Loading...</h3>
-    //     )
-    // }
-    if (!categories) {
-        return (
-            <h3 className="loading-title">Loading...</h3>
-        )
-    }
+    const { filterClickHandler } = useGlobalContext();
+
     return (
         <section className='section category'>
             <div className="category-container">
-                {categories.map((category, index) => {
-                    return (
-                        <button key={index}>{category}</button>
-                    )
-                })}
+                <button onClick={filterClickHandler}>Alcoholic</button>
+                <button onClick={filterClickHandler}>Non_Alcoholic</button>
             </div>
         </section>
     )
