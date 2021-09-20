@@ -14,7 +14,7 @@ const Categories = () => {
         <section className='section category'>
             <div className="category-container">
                 <button className={clsNameAlc} onClick={filterClickHandler}>Alcoholic</button>
-                <button className={clsNameNonAlc} onClick={filterClickHandler}>Non_Alcoholic</button>
+                <button className={clsNameNonAlc} onClick={filterClickHandler}>Non Alcoholic</button>
             </div>
         </section>
     )

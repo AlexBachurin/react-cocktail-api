@@ -28,12 +28,14 @@ export const AppProvider = ({ children }) => {
             if (drinks) {
                 //get from data only properties that we need
                 const newDrinks = drinks.map(item => {
+                    console.log(item);
                     const {
                         idDrink,
                         strDrink,
                         strAlcoholic,
                         strDrinkThumb,
-                        strGlass
+                        strGlass,
+                        strCategory
                     } = item;
                     //and return new item with this properties
                     return {
@@ -41,10 +43,27 @@ export const AppProvider = ({ children }) => {
                         name: strDrink,
                         alcoholic: strAlcoholic,
                         image: strDrinkThumb,
-                        glass: strGlass
+                        glass: strGlass,
+                        category: strCategory
                     }
                 })
-                setDrinks(newDrinks);
+                //filter drinks if category is chosen
+                if (filterWord) {
+                    let tempVar = ''
+                    if (filterWord === 'Non_Alcoholic') {
+                        tempVar = 'Non alcoholic'
+                    } else {
+                        tempVar = 'Alcoholic';
+                    }
+                    const filterDrinks = newDrinks.filter(item => {
+                        return item.alcoholic === tempVar;
+                    })
+                    setDrinks(filterDrinks);
+                    //if category is not chosen then dont filter it
+                } else {
+                    setDrinks(newDrinks);
+                }
+
             } else {
                 setDrinks([]);
             }
@@ -55,11 +74,18 @@ export const AppProvider = ({ children }) => {
         }
     }
     const setSearchTerm = (e) => {
-        setTerm(e.target.value);
+        //transform to lower case for easier search
+        setTerm(e.target.value.toLowerCase());
     }
 
     const filterClickHandler = (e) => {
-        setFilterWord(e.target.textContent);
+        let tempVar = '';
+        if (e.target.textContent === 'Non Alcoholic') {
+            tempVar = 'Non_Alcoholic';
+        } else {
+            tempVar = 'Alcoholic'
+        }
+        setFilterWord(tempVar);
     }
     const filterAlcoholic = (filterWord) => {
         const fetchAlcoholic = async () => {
@@ -90,7 +116,8 @@ export const AppProvider = ({ children }) => {
                     })
                     //if we have some words in searchTerm when filter them, to show only drinks that have it in name
                     const filteredDrinks = newDrinks.filter(item => {
-                        return item.name.includes(term)
+                        //transform to lowerCase since we have term in lower case already it should match even if we type in caps
+                        return item.name.toLowerCase().includes(term)
                     })
                     console.log(filteredDrinks)
                     setDrinks(filteredDrinks);
