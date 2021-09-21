@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useCallback } from "react";
 // import { useFetch } from "./useFetch";
 
 const url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s='
@@ -13,11 +13,11 @@ export const AppProvider = ({ children }) => {
     const [loading, setLoading] = useState(false);
     const [drinks, setDrinks] = useState([]);
     //state for filter
-    const [filterWord, setFilterWord] = useState('');
+    const [filterWord, setFilterWord] = useState(null);
     //create searchTerm for urlwith search
     const searchTerm = `${url}${term}`;
 
-    const getData = async () => {
+    const getData = useCallback(async () => {
         setLoading(true);
         try {
             const res = await fetch(searchTerm);
@@ -28,7 +28,6 @@ export const AppProvider = ({ children }) => {
             if (drinks) {
                 //get from data only properties that we need
                 const newDrinks = drinks.map(item => {
-                    console.log(item);
                     const {
                         idDrink,
                         strDrink,
@@ -72,7 +71,7 @@ export const AppProvider = ({ children }) => {
             console.log(error);
             setLoading(false);
         }
-    }
+    }, [filterWord, searchTerm])
     const setSearchTerm = (e) => {
         //transform to lower case for easier search
         setTerm(e.target.value.toLowerCase());
@@ -87,51 +86,48 @@ export const AppProvider = ({ children }) => {
         }
         setFilterWord(tempVar);
     }
-    const filterAlcoholic = (filterWord) => {
-        const fetchAlcoholic = async () => {
-            setLoading(true);
-            try {
-                const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=${filterWord}`);
-                const data = await response.json();
-                const { drinks } = data;
-                //iterate only if there is drinks
-                if (drinks) {
-                    //get from data only properties that we need
-                    const newDrinks = drinks.map(item => {
-                        const {
-                            idDrink,
-                            strDrink,
-                            strAlcoholic,
-                            strDrinkThumb,
-                            strGlass
-                        } = item;
-                        //and return new item with this properties
-                        return {
-                            id: idDrink,
-                            name: strDrink,
-                            alcoholic: strAlcoholic,
-                            image: strDrinkThumb,
-                            glass: strGlass
-                        }
-                    })
-                    //if we have some words in searchTerm when filter them, to show only drinks that have it in name
-                    const filteredDrinks = newDrinks.filter(item => {
-                        //transform to lowerCase since we have term in lower case already it should match even if we type in caps
-                        return item.name.toLowerCase().includes(term)
-                    })
-                    console.log(filteredDrinks)
-                    setDrinks(filteredDrinks);
-                } else {
-                    setDrinks([]);
-                }
-            } catch (error) {
-                console.log(error);
-                setLoading(false);
+    const fetchAlcoholic = useCallback(async (filterWord) => {
+        setLoading(true);
+        try {
+            const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=${filterWord}`);
+            const data = await response.json();
+            const { drinks } = data;
+            //iterate only if there is drinks
+            if (drinks) {
+                //get from data only properties that we need
+                const newDrinks = drinks.map(item => {
+                    const {
+                        idDrink,
+                        strDrink,
+                        strAlcoholic,
+                        strDrinkThumb,
+                        strGlass
+                    } = item;
+                    //and return new item with this properties
+                    return {
+                        id: idDrink,
+                        name: strDrink,
+                        alcoholic: strAlcoholic,
+                        image: strDrinkThumb,
+                        glass: strGlass
+                    }
+                })
+                //if we have some words in searchTerm when filter them, to show only drinks that have it in name
+                const filteredDrinks = newDrinks.filter(item => {
+                    //transform to lowerCase since we have term in lower case already it should match even if we type in caps
+                    return item.name.toLowerCase().includes(term)
+                })
+                setDrinks(filteredDrinks);
+            } else {
+                setDrinks([]);
             }
+        } catch (error) {
+            console.log(error);
             setLoading(false);
         }
-        fetchAlcoholic();
-    }
+        setLoading(false);
+    }, [term])
+
 
     //reset input on every home click
     const resetOnHome = () => {
@@ -142,12 +138,12 @@ export const AppProvider = ({ children }) => {
     useEffect(() => {
         getData();
 
-    }, [term]);
+    }, [term, getData]);
 
     //fetch on every filterWord change 
     useEffect(() => {
-        filterAlcoholic(filterWord);
-    }, [filterWord])
+        fetchAlcoholic(filterWord);
+    }, [filterWord, fetchAlcoholic])
 
 
     return <AppContext.Provider value={{

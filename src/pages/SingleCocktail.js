@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import Loading from '../components/Loading';
 import { useGlobalContext } from '../context';
@@ -13,7 +13,7 @@ const SingleCocktail = () => {
     const [loading, setLoading] = useState(false);
     const [cocktail, setCocktail] = useState(null)
     //fetch cocktail from lookup
-    const fetchCocktail = async () => {
+    const fetchCocktail = useCallback(async () => {
         setLoading(true)
         try {
             const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
@@ -47,10 +47,11 @@ const SingleCocktail = () => {
         }
         setLoading(false);
 
-    }
+    }, [id])
+
     useEffect(() => {
         fetchCocktail();
-    }, [id]);
+    }, [id, fetchCocktail]);
 
     //check for loading
     if (loading) {
