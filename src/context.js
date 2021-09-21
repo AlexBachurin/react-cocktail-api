@@ -24,10 +24,9 @@ export const AppProvider = ({ children }) => {
             const data = await res.json();
             //get drinks object from our data
             const { drinks } = data;
-            console.log('fetch data')
             //iterate only if there is drinks
             if (drinks) {
-                console.log(drinks)
+
                 //get from data only properties that we need
                 const newDrinks = drinks.map(item => {
                     const {
@@ -59,7 +58,6 @@ export const AppProvider = ({ children }) => {
                     const filterDrinks = newDrinks.filter(item => {
                         return item.alcoholic === tempVar;
                     })
-                    console.log(filterDrinks)
                     setDrinks(filterDrinks);
                     //if category is not chosen then dont filter it
                 } else {
