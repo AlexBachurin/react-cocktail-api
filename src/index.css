@@ -38,8 +38,8 @@ Global Styles
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  color: var(--mainBlack);
-  background: var(--mainBackground);
+  color: #d3cfc9;
+  background: #1e2022;
   line-height: 1.4;
   font-size: 1rem;
   font-weight: 300;
@@ -62,7 +62,7 @@ ul {
 }
 a {
   text-decoration: none;
-  color: var(--mainBlack);
+  color: #d3cfc9;
 }
 img {
   width: 100%;
@@ -132,12 +132,12 @@ Navbar
 ======
 */
 .navbar {
-  background: var(--mainWhite);
+  background: #181a1b;
   height: 5rem;
   display: flex;
   align-items: center;
-  border-bottom: 2px solid var(--primaryColor);
-  box-shadow: var(--lightShadow);
+  border-bottom: 2px solid #62923f;
+  box-shadow: 2px 5px 3px 0px rgba(0, 0, 0, 0.5);
 }
 .nav-center {
   display: flex;
@@ -234,9 +234,9 @@ Cocktail
 */
 
 .cocktail {
-  background: var(--mainWhite);
+  background: #181a1b;
   margin-bottom: 2rem;
-  box-shadow: var(--lightShadow);
+  box-shadow: 2px 5px 3px 0px rgba(0, 0, 0, 0.5);
   transition: var(--mainTransition);
   display: grid;
   grid-template-rows: auto 1fr;
@@ -280,7 +280,7 @@ Form
   width: var(--smallWidth);
   margin: 0 auto;
   max-width: var(--maxWidth);
-  background: var(--mainWhite);
+  background: #181a1b;
   padding: 2rem 2.5rem;
   text-transform: capitalize;
   border-radius: var(--mainBorderRadius);
@@ -292,16 +292,18 @@ Form
   margin-bottom: 1.25rem;
   font-weight: bold;
   letter-spacing: 0.25rem;
-  color: var(--primaryColor);
+  color: #abcf91;
 }
 .form-control input {
   width: 100%;
   border: none;
   border-color: transparent;
-  background: var(--mainBackground);
+  background: #8f9091;
   border-radius: var(--mainBorderRadius);
   padding: 0.5rem;
   font-size: 1.2rem;
+  caret-color: #fff;
+  color: #fff;
 }
 /* 
 ====== 
@@ -393,12 +395,14 @@ Cocktail
   outline: none;
   cursor: pointer;
   border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
 }
 .cocktails {
   padding: 1rem 0;
 }
 .active-btn {
-  background: #000;
+  background: #abcf91;
   color: #fff;
 }
 @-webkit-keyframes load1 {
